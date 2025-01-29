@@ -1,0 +1,59 @@
+name: PR Validation Workflow
+
+on:
+  pull_request:
+    branches:
+      - develop  # This will trigger the workflow on PRs targeting the develop branch
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # You can specify the version you're using
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm install -g htmlhint stylelint  # Install the linting tools globally
+
+      - name: Lint HTML Files
+        run: |
+          htmlhint src/**/*.html  # Lint all HTML files in the src directory
+
+      - name: Lint CSS Files
+        run: |
+          stylelint src/**/*.css  # Lint all CSS files in the src directory
+
+  build:
+    runs-on: ubuntu-latest
+    needs: linting  # Ensure this job only runs after linting is successful
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm install -g parcel-bundler  # Install Parcel globally
+
+      - name: Build Static Website
+        run: |
+          parcel build src/index.html --no-cache  # Build the static site (without deploying it)
+
+      - name: Check Build Integrity
+        run: |
+          if [ ! -f dist/index.html ]; then exit 1; fi  # Ensure build output exists
+
