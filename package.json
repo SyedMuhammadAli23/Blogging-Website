@@ -1,0 +1,18 @@
+{
+    "name": "blogging-website",
+    "version": "1.0.0",
+    "description": "A simple static blogging website with multiple pages",
+    "main": "index.js",
+    "scripts": {
+      "lint": "eslint src/**/*.js",
+      "build": "echo 'Building static site...'",
+      "deploy": "echo 'Deploying to GitHub Pages...'"
+    },
+    "author": "your-roll-number",
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {
+      "eslint": "^8.0.0"
+    }
+  }
+  
