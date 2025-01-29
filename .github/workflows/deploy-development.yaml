@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages (Development)
+
+on:
+  push:
+    branches:
+      - develop  # Trigger deployment on push to the develop branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Set the Node.js version you're using
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm install -g parcel-bundler  # Install Parcel globally
+
+      - name: Build Static Website
+        run: |
+          parcel build src/index.html --no-cache  # Build the site (without deploying)
+
+      - name: Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist  # Upload the 'dist' directory where Parcel outputs the built site
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build  # Ensure deploy job runs only after the build job succeeds
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          branch: gh-pages  # GitHub Pages branch
+          folder: dist  # Folder containing the built website (from the 'dist' folder)
