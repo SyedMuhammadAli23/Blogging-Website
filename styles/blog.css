@@ -1,0 +1,73 @@
+/* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #444;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #666;
+    font-size: 1.2em;
+}
+
+/* Blog Post Styles */
+.blog-post {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog-post h2 {
+    color: #0073e6;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.blog-post .date {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.blog-post .content {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    text-decoration: none;
+    color: #0073e6;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #888;
+}
